@@ -1,0 +1,33 @@
+version: "3"
+services:
+  hub: 
+    image: seleniarm/hub:4.10
+    networks:
+      - selenium-grid
+
+  chrome:
+    image: seleniarm/node-chromium:4.10
+    shm_size: '2g'
+    depends_on:
+      - hub
+    deploy:
+      replicas: 1
+    env_file: .env
+    networks:
+      - selenium-grid
+
+  firefox:
+    image: seleniarm/node-firefox:4.10
+    shm_size: '2g'
+    depends_on:
+      - hub
+    deploy:
+      replicas: 1
+    env_file: .env
+    networks:
+      - selenium-grid
+
+
+networks:
+  selenium-grid:
+    driver: bridge
