@@ -9,7 +9,7 @@ pipeline{
         }
         stage('Run Test'){
             steps{
-                echo "docker-compose -f test-suites.yaml up"
+                sh "docker-compose -f test-suites.yaml up"
             }
         }
     }
